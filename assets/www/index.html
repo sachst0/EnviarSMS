@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enviar SMS</title>
+    
+    <script src="cordova-2.6.0.js"></script>
+    <script src="SmsSendingPlugin.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var smsSendingPlugin = cordova.require('cordova/plugin/smssendingplugin');
+        
+        function enviarSMS(){
+            smsSendingPlugin.isSupported((function(supported){
+                if(supported)
+                    alert('SMS Supported');
+                else
+                    alert('SMS not supported');
+            }), function(){
+                alert('Error while checking SMS support');
+            });
+            
+            smsSendingPlugin.send("0050499907969", "Hello World!", function(){
+                alert('Message sent :-)');
+            }, function(){
+                alert ('Message not sent :-S');
+            });
+        }
+    </script>
+</head>
+<body>
+    <button onclick="enviarSMS();">Enviar SMS</button>
+</body>
+</html>
